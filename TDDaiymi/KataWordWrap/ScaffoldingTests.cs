@@ -9,6 +9,16 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
+        public void Put_more_words_in_one_line()
+        {
+            var sut = new Wrapper();
+
+            var result = sut.Wrap("a bc def", 5);
+
+            Assert.AreEqual("a bc\ndef", result);
+        }
+
+        [Test]
         public void Wrap_two_short_words()
         {
             var sut = new Wrapper();
