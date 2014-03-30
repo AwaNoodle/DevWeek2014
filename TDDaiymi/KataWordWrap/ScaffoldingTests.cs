@@ -10,40 +10,6 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
-        public void Build_multi_word_lines()
-        {
-            var words = new[] {"a", "bc", "def"};
-            var maxLineLen = 5;
-
-            var result = "";
-            var line = "";
-            Action append_line = () => {
-                if (line != "") {
-                    if (result != "") result += "\n";
-                    result += line;
-                    line = "";
-                }
-            }; 
-            
-            while (words.Length > 0)
-            {
-                var word = words[0];
-
-                if (line.Length + 1 + word.Length > maxLineLen)
-                    append_line();
-                else
-                    if (line != "") line += " ";
-
-                line += word;
-                words = words.Skip(1).ToArray();
-            }
-            append_line();
-
-            Assert.AreEqual("a bc\ndef", result);
-        }
-
-
-        [Test]
         public void Put_more_words_in_one_line()
         {
             var sut = new Wrapper();

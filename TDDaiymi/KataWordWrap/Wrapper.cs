@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KataWordWrap
 {
@@ -19,7 +20,31 @@ namespace KataWordWrap
 
         private string Build_lines_from_words(IEnumerable<string> words, int maxLineLength)
         {
-            return string.Join("\n", words);
+            var result = "";
+            var line = "";
+            Action append_line = () => {
+                if (line != "") {
+                    if (result != "") result += "\n";
+                    result += line;
+                    line = "";
+                }
+            };
+
+            while (words.Any())
+            {
+                var word = words.First();
+
+                if (line.Length + 1 + word.Length > maxLineLength)
+                    append_line();
+                else
+                    if (line != "") line += " ";
+
+                line += word;
+                words = words.Skip(1).ToArray();
+            }
+            append_line();
+
+            return result;
         }
     }
 }
