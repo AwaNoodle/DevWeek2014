@@ -9,6 +9,17 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
+        public void Build_lines_from_words()
+        {
+            var words = new[] {"word1", "word2"};
+
+            var result = "";
+
+            Assert.AreEqual("word1\nword2", result);
+        }
+
+
+        [Test]
         public void Wrap_two_short_words()
         {
             var sut = new Wrapper();
