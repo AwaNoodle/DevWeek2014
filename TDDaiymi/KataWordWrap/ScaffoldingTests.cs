@@ -8,6 +8,17 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
+        public void Split_line_into_words()
+        {
+            var text = " a  b   c ";
+
+            var result = new string[0];
+
+            Assert.AreEqual(new[] { "a", "b", "c" }, result);
+        }
+
+
+        [Test]
         public void Wrap_two_short_words()
         {
             var sut = new Wrapper();
