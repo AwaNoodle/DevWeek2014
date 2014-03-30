@@ -13,7 +13,7 @@ namespace KataWordWrap
         {
             var words = new[] {"word1", "word2"};
 
-            var result = "";
+            var result = string.Join("\n", words);
 
             Assert.AreEqual("word1\nword2", result);
         }
