@@ -15,6 +15,13 @@ namespace KataWordWrap
             var word = "abc";
             var maxLineLength = 2;
 
+            var result = Split_single_long_word(word, maxLineLength);
+
+            Assert.AreEqual(new[]{"ab", "c"}, result);
+        }
+
+        private static string[] Split_single_long_word(string word, int maxLineLength)
+        {
             var syllables = new List<string>();
             while (word.Length > maxLineLength)
             {
@@ -24,8 +31,7 @@ namespace KataWordWrap
             if (word != "") syllables.Add(word);
 
             var result = syllables.ToArray();
-
-            Assert.AreEqual(new[]{"ab", "c"}, result);
+            return result;
         }
 
 
