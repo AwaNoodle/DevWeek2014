@@ -12,10 +12,18 @@ namespace KataWordWrap
         [Test]
         public void Split_long_word()
         {
-            var words = new[] {"abc"};
+            var word = "abc";
             var maxLineLength = 2;
 
-            var result = new string[0];
+            var syllables = new List<string>();
+            while (word.Length > maxLineLength)
+            {
+                syllables.Add(word.Substring(0, maxLineLength));
+                word = word.Substring(maxLineLength);
+            }
+            if (word != "") syllables.Add(word);
+
+            var result = syllables.ToArray();
 
             Assert.AreEqual(new[]{"ab", "c"}, result);
         }
