@@ -40,7 +40,7 @@ namespace KataWordWrap
                     if (line != "") line += " ";
 
                 line += word;
-                words = words.Skip(1).ToArray();
+                words = words.Skip(1);
             }
             append_line();
 

@@ -10,6 +10,17 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
+        public void Wrap_word_longer_than_line()
+        {
+            var sut = new Wrapper();
+
+            var result = sut.Wrap("longword", 4);
+
+            Assert.AreEqual("long\nword", result);
+        }
+
+
+        [Test]
         public void Put_more_words_in_one_line()
         {
             var sut = new Wrapper();
