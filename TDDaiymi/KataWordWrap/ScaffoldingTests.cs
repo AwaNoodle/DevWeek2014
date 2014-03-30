@@ -12,7 +12,7 @@ namespace KataWordWrap
         {
             var text = " a  b   c ";
 
-            var result = new string[0];
+            var result = text.Split(' ');
 
             Assert.AreEqual(new[] { "a", "b", "c" }, result);
         }
