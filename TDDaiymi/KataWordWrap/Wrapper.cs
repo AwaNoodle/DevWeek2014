@@ -19,7 +19,7 @@ namespace KataWordWrap
 
         private string Build_lines_from_words(IEnumerable<string> words, int maxLineLength)
         {
-            throw new NotImplementedException();
+            return string.Join("\n", words);
         }
     }
 }
