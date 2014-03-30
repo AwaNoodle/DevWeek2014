@@ -17,27 +17,27 @@ namespace KataWordWrap
 
             var result = "";
             var line = "";
+            Action append_line = () => {
+                if (line != "") {
+                    if (result != "") result += "\n";
+                    result += line;
+                    line = "";
+                }
+            }; 
+            
             while (words.Length > 0)
             {
                 var word = words[0];
 
                 if (line.Length + 1 + word.Length > maxLineLen)
-                {
-                    if (result != "") result += "\n";
-                    result += line;
-                    line = "";
-                }
+                    append_line();
                 else
                     if (line != "") line += " ";
 
                 line += word;
                 words = words.Skip(1).ToArray();
             }
-            if (line != "")
-            {
-                if (result != "") result += "\n";
-                result += line;
-            }
+            append_line();
 
             Assert.AreEqual("a bc\ndef", result);
         }
