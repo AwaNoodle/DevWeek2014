@@ -22,7 +22,7 @@ namespace KataWordWrap
 
         private IEnumerable<string> Split_long_words(IEnumerable<string> words, int maxLineLength)
         {
-            return words.SelectMany(word => Wrapper.Split_single_long_word(word, maxLineLength));
+            return words.SelectMany(word => Split_single_long_word(word, maxLineLength));
         }
 
         private static IEnumerable<string> Split_single_long_word(string word, int maxLineLength)
