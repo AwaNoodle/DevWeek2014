@@ -6,7 +6,7 @@ namespace KataWordWrap
     {
         public string Wrap(string text, int maxLineLength)
         {
-            throw new NotImplementedException();
+            return text;
         }
     }
 }
