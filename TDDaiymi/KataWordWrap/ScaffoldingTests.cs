@@ -15,7 +15,7 @@ namespace KataWordWrap
             var words = new[] {"a", "bcd", "ef"};
             var maxLineLength = 2;
 
-            var result = new[] {""};
+            var result = words.SelectMany(word => Split_single_long_word(word, maxLineLength));
 
             Assert.AreEqual(new[]{"a", "bc", "d", "ef"}, result);
         }
