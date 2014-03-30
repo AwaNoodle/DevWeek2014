@@ -9,6 +9,7 @@ namespace KataWordWrap
         public string Wrap(string text, int maxLineLength)
         {
             var words = Split_line_into_words(text);
+            words = Split_long_words(words);
             return Build_lines_from_words(words, maxLineLength);
         }
 
@@ -18,6 +19,12 @@ namespace KataWordWrap
             return text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        private IEnumerable<string> Split_long_words(IEnumerable<string> words)
+        {
+            words.ToList().ForEach(Console.WriteLine);
+            throw new NotImplementedException();
+        }
+        
         private string Build_lines_from_words(IEnumerable<string> words, int maxLineLength)
         {
             var result = "";

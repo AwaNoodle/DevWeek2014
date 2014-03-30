@@ -13,10 +13,13 @@ namespace KataWordWrap
         public void Wrap_word_longer_than_line()
         {
             var sut = new Wrapper();
+            Mock.NonPublic.Arrange<IEnumerable<string>>(sut, "Split_long_words", (IEnumerable<string>)new[]{"longword"})
+                          .Returns(new[]{"long", "word"}).MustBeCalled();
 
             var result = sut.Wrap("longword", 4);
 
             Assert.AreEqual("long\nword", result);
+            Mock.Assert(sut);
         }
 
 
