@@ -10,48 +10,9 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
-        public void Split_long_words()
-        {
-            var words = new[] {"a", "bcd", "ef"};
-            var maxLineLength = 2;
-
-            var result = words.SelectMany(word => Split_single_long_word(word, maxLineLength));
-
-            Assert.AreEqual(new[]{"a", "bc", "d", "ef"}, result);
-        }
-
-        [Test]
-        public void Split_long_word()
-        {
-            var word = "abc";
-            var maxLineLength = 2;
-
-            var result = Split_single_long_word(word, maxLineLength);
-
-            Assert.AreEqual(new[]{"ab", "c"}, result);
-        }
-
-        private static string[] Split_single_long_word(string word, int maxLineLength)
-        {
-            var syllables = new List<string>();
-            while (word.Length > maxLineLength)
-            {
-                syllables.Add(word.Substring(0, maxLineLength));
-                word = word.Substring(maxLineLength);
-            }
-            if (word != "") syllables.Add(word);
-
-            var result = syllables.ToArray();
-            return result;
-        }
-
-
-        [Test]
         public void Wrap_word_longer_than_line()
         {
             var sut = new Wrapper();
-            Mock.NonPublic.Arrange<IEnumerable<string>>(sut, "Split_long_words", (IEnumerable<string>)new[]{"longword"})
-                          .Returns(new[]{"long", "word"}).MustBeCalled();
 
             var result = sut.Wrap("longword", 4);
 
