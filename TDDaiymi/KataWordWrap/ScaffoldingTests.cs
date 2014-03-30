@@ -15,6 +15,7 @@ namespace KataWordWrap
             Assert.AreEqual("word1\nword2", result);
         }
 
+
         [Test]
         public void Single_short_word_in_line()
         {
