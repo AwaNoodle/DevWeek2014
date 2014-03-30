@@ -10,6 +10,17 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
+        public void Split_long_words()
+        {
+            var words = new[] {"a", "bcd", "ef"};
+            var maxLineLength = 2;
+
+            var result = new[] {""};
+
+            Assert.AreEqual(new[]{"a", "bc", "d", "ef"}, result);
+        }
+
+        [Test]
         public void Split_long_word()
         {
             var word = "abc";
