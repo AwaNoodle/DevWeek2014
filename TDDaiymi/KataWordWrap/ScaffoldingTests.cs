@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Telerik.JustMock;
 
@@ -15,6 +16,28 @@ namespace KataWordWrap
             var maxLineLen = 5;
 
             var result = "";
+            var line = "";
+            while (words.Length > 0)
+            {
+                var word = words[0];
+
+                if (line.Length + 1 + word.Length > maxLineLen)
+                {
+                    if (result != "") result += "\n";
+                    result += line;
+                    line = "";
+                }
+                else
+                    if (line != "") line += " ";
+
+                line += word;
+                words = words.Skip(1).ToArray();
+            }
+            if (line != "")
+            {
+                if (result != "") result += "\n";
+                result += line;
+            }
 
             Assert.AreEqual("a bc\ndef", result);
         }
