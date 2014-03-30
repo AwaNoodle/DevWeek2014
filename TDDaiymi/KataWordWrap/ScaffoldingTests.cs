@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Telerik.JustMock;
 
@@ -12,7 +13,7 @@ namespace KataWordWrap
         {
             var text = " a  b   c ";
 
-            var result = text.Split(' ');
+            var result = text.Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries);
 
             Assert.AreEqual(new[] { "a", "b", "c" }, result);
         }
