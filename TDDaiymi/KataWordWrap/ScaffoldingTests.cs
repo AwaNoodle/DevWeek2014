@@ -9,6 +9,18 @@ namespace KataWordWrap
     public class ScaffoldingTests
     {
         [Test]
+        public void Build_multi_word_lines()
+        {
+            var words = new[] {"a", "bc", "def"};
+            var maxLineLen = 5;
+
+            var result = "";
+
+            Assert.AreEqual("a bc\ndef", result);
+        }
+
+
+        [Test]
         public void Put_more_words_in_one_line()
         {
             var sut = new Wrapper();
