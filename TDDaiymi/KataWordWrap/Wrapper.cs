@@ -14,7 +14,7 @@ namespace KataWordWrap
 
         private IEnumerable<string> Split_line_into_words(string text)
         {
-            throw new NotImplementedException();
+            return text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         private string Build_lines_from_words(IEnumerable<string> words, int maxLineLength)

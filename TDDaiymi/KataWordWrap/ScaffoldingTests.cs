@@ -11,9 +11,10 @@ namespace KataWordWrap
         [Test]
         public void Split_line_into_words()
         {
-            var text = " a  b   c ";
+            var psut = new PrivateAccessor(new Wrapper());
 
-            var result = text.Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries);
+            var text = " a  b   c ";
+            var result = psut.CallMethod("Split_line_into_words", text);
 
             Assert.AreEqual(new[] { "a", "b", "c" }, result);
         }
