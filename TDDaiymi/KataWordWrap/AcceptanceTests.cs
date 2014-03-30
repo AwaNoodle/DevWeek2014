@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +17,26 @@ namespace KataWordWrap
             var result = sut.Wrap(text, maxLineLength);
             Assert.AreEqual(expected, result);
         }
-    }
 
-    public class Wrapper
-    {
-        public string Wrap(string text, int maxLineLength)
+        [TestCase("zeile1 zeile2", 6, "zeile1\nzeile2")]
+        [TestCase("zeile1 zeile2", 7, "zeile1\nzeile2")]
+        [TestCase("zeile1 zeile2", 8, "zeile1\nzeile2")]
+        [TestCase("zeile1 z zeile2", 8, "zeile1 z\nzeile2")]
+        public void Wrap_words_shorter_than_line(string text, int maxLineLength, string expected)
         {
-            throw new NotImplementedException();
+            var sut = new Wrapper();
+            var result = sut.Wrap(text, maxLineLength);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("zeile", 5, "zeile")]
+        [TestCase("zeile1zeile2", 6, "zeile1\nzeile2")]
+        [TestCase("zeile1zeile2zeile3", 6, "zeile1\nzeile2\nzeile3")]
+        public void Wrap_words_longer_than_line(string text, int maxLineLength, string expected)
+        {
+            var sut = new Wrapper();
+            var result = sut.Wrap(text, maxLineLength);
+            Assert.AreEqual(expected, result);
         }
     }
 }
