@@ -16,9 +16,11 @@ namespace csv.formatting.tests
         {
             var sut = new CSVtoASCIITableFormatter();
 
+            Console.WriteLine("---CSV input:\n{0}", csv);
             var table = sut.Format(csv);
 
             Assert.AreEqual(expected, table);
+            Console.WriteLine("\n---Table output:\n{0}", table);
         }
     }
 }
