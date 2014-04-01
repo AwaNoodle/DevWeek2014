@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using csv.formatting.data;
 
 namespace csv.formatting.operations
 {
     class CSVParser
     {
-        public IEnumerable<string[]> Parse(string csv)
+        public IEnumerable<CSVRecord> Parse(string csv)
         {
             var csvLines = csv.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
-            return csvLines.Select<string, string[]>(l => Convert_CSV_line_to_record_fields(l, ";", new List<string>()).ToArray());
+            return csvLines.Select<string, string[]>(l => Convert_CSV_line_to_record_fields(l, ";", new List<string>()).ToArray())
+                           .Select(fields => new CSVRecord{Fields = fields});
         }
 
         private List<string> Convert_CSV_line_to_record_fields(string line, string delimiter, List<string> fields)
