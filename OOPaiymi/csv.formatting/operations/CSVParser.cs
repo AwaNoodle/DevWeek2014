@@ -10,7 +10,7 @@ namespace csv.formatting.operations
         public IEnumerable<CSVRecord> Parse(string csv)
         {
             var csvLines = csv.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
-            return csvLines.Select<string, string[]>(l => Convert_CSV_line_to_record_fields(l, ";", new List<string>()).ToArray())
+            return csvLines.Select(l => Convert_CSV_line_to_record_fields(l, ";", new List<string>()).ToArray())
                            .Select(fields => new CSVRecord{Fields = fields});
         }
 
@@ -26,10 +26,7 @@ namespace csv.formatting.operations
 
                 line = line.Substring(iApo + 1);
                 var iDelim = line.IndexOf(delimiter);
-                if (iDelim >= 0)
-                    line = line.Substring(iDelim + 1);
-                else
-                    line = "";
+                line = iDelim >= 0 ? line.Substring(iDelim + 1) : "";
             }
             else
             {
