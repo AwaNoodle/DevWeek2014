@@ -18,32 +18,47 @@ namespace csv.formatting.operations
         {
             if (line == "") return fields;
 
-            if (line.StartsWith("\""))
-            {
-                line = line.Substring(1);
-                var iApo = line.IndexOf("\"");
-                fields.Add(line.Substring(0, iApo).Trim());
+            Check_for_apostroph_field(line,
+            () => line = Handle_field_apostrophs(line, delimiter, fields),
+            () => line = Handle_plain_field(line, delimiter, fields));
 
-                line = line.Substring(iApo + 1);
-                var iDelim = line.IndexOf(delimiter);
-                line = iDelim >= 0 ? line.Substring(iDelim + 1) : "";
+            return Convert_CSV_line_to_record_fields(line, delimiter, fields);
+        }
+
+        private void Check_for_apostroph_field(string line, Action onApostrophField, Action onPlainField)
+        {
+            if (line.StartsWith("\""))
+                onApostrophField();
+            else
+                onPlainField();
+        }
+
+        private string Handle_field_apostrophs(string line, string delimiter, List<string> fields)
+        {
+            line = line.Substring(1);
+            var iApo = line.IndexOf("\"");
+            fields.Add(line.Substring(0, iApo).Trim());
+
+            line = line.Substring(iApo + 1);
+            var iDelim = line.IndexOf(delimiter);
+            line = iDelim >= 0 ? line.Substring(iDelim + 1) : "";
+            return line;
+        }
+        
+        private string Handle_plain_field(string line, string delimiter, List<string> fields)
+        {
+            var iDelim = line.IndexOf(delimiter);
+            if (iDelim >= 0)
+            {
+                fields.Add(line.Substring(0, iDelim).Trim());
+                line = line.Substring(iDelim + 1);
             }
             else
             {
-                var iDelim = line.IndexOf(delimiter);
-                if (iDelim >= 0)
-                {
-                    fields.Add(line.Substring(0, iDelim).Trim());
-                    line = line.Substring(iDelim + 1);
-                }
-                else
-                {
-                    fields.Add(line.Trim());
-                    line = "";
-                }
+                fields.Add(line.Trim());
+                line = "";
             }
-
-            return Convert_CSV_line_to_record_fields(line, delimiter, fields);
+            return line;
         }
     }
 }
